@@ -1,17 +1,56 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+class WhoAmI extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            years: this.props.years
+        };
+
+    }
+
+    nextYear = () => {
+        this.setState((state) => {
+            return ({
+                years: ++state.years
+            })
+
+        })
+    }
+
+    previousYear = () => {
+        this.setState((state) => {
+            return ({
+                years: --state.years
+            })
+        })
+    }
+
+    render() {
+        return (<>
+            <h1>My name is {this.props.name}, Surname {this.props.surname}, Age {this.state.years} </h1>
+            <a href={this.props.link}>My Profile</a>
+            <button onClick={this.nextYear}>++</button>
+            <button onClick={this.previousYear}>--</button>
+
+        </>)
+    }
+
+}
+
+let All = () => {
+    return (<>
+        <WhoAmI name="Ruslan" surname="Nemtsev" link="https://www.google.com" years="15"/>
+        <WhoAmI name="Ruslan" surname="Nemtsev" link="https://www.google.com" years="15"/>
+        <WhoAmI name="Ruslan" surname="Nemtsev" link="https://www.google.com" years="15"/>
+        <WhoAmI name="Ruslan" surname="Nemtsev" link="https://www.google.com" years="15"/>
+    </>)
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <All/>,
+    document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
